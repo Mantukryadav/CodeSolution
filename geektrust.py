@@ -1,4 +1,5 @@
 from sys import argv
+import re
 
 def main():
     # Sample code to read inputs from the file
@@ -18,7 +19,7 @@ def main():
             'MARKER': {'price': 500, 'discount': 5, 'max_quantity': 3},
         }
         purchases = {}
-        def add_item(name, quantity):
+        def ADD_ITEM(name, quantity):
             if name in products:
                 if quantity > products[name]['max_quantity']:
                     print("ERROR_QUANTITY_EXCEEDED")
@@ -28,7 +29,7 @@ def main():
                 else:
                     purchases[name] = {'quantity': quantity}
             print("ITEM_ADDED")
-        def print_bill():
+        def PRINT_BILL():
             total_amount = 0
             total_discount = 0
             for name, details in purchases.items():
@@ -51,11 +52,16 @@ def main():
             # print_bill()
         product_name = input("Enter the name of product")
         product_quantity = input("Enter the quantity of product") 
-        add_item(product_name, product_quantity)
-        print_bill
-        output = "" #process the input command and get the output
-        # Once it is processed print the output using the command System.out.println()
-        print(output)
+        list1 = re.split(r'\s', line)
+        pattern = r"^p"
+        if re.match(pattern, line):
+            command = list1[0]
+        else:
+            command = list1[0] + "(" + list1[1] + "," + list1[2] + ")"
+        exec(command)
+        # output = z #process the input command and get the output
+        # # Once it is processed print the output using the command System.out.println()
+        # print(output)
     
 if __name__ == "__main__":
     main()
